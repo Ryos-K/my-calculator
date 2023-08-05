@@ -1,5 +1,6 @@
+#line 2 "lexer.c"
 
-#line 3 "lex.yy.c"
+#line 4 "lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -365,16 +366,16 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[17] =
     {   0,
-        0,    0,   11,   10,    8,    7,    5,    6,    3,    1,
+        0,    0,   11,   10,    8,    5,    6,    7,    3,    1,
         2,    4,    9,    8,    9,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    2,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    1,    1,    1,    1,    1,    4,
+        1,    2,    1,    1,    1,    1,    3,    1,    1,    4,
         5,    6,    7,    1,    8,    1,    9,   10,   11,   11,
        11,   11,   11,   11,   11,   11,   11,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -450,9 +451,9 @@ char *yytext;
 #line 1 "calc.l"
 #line 2 "calc.l"
 #include <stdio.h>
-#include "y.tab.h"
-#line 455 "lex.yy.c"
-#line 456 "lex.yy.c"
+#include "parser.h"
+#line 456 "lexer.c"
+#line 457 "lexer.c"
 
 #define INITIAL 0
 
@@ -669,9 +670,9 @@ YY_DECL
 		}
 
 	{
-#line 8 "calc.l"
+#line 9 "calc.l"
 
-#line 675 "lex.yy.c"
+#line 676 "lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -730,48 +731,47 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 9 "calc.l"
+#line 10 "calc.l"
 return ADD;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 10 "calc.l"
+#line 11 "calc.l"
 return SUB;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 11 "calc.l"
+#line 12 "calc.l"
 return MUL;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 12 "calc.l"
+#line 13 "calc.l"
 return DIV;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 13 "calc.l"
-return LP;
+#line 14 "calc.l"
+return MOD;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 14 "calc.l"
-return RP;
+#line 15 "calc.l"
+return LP;
 	YY_BREAK
 case 7:
-/* rule 7 can match eol */
 YY_RULE_SETUP
-#line 15 "calc.l"
-return CR;
+#line 16 "calc.l"
+return RP;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 16 "calc.l"
+#line 17 "calc.l"
 ;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 17 "calc.l"
+#line 18 "calc.l"
 {
     int val;
     sscanf(yytext, "%d", &val);
@@ -781,10 +781,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 23 "calc.l"
+#line 24 "calc.l"
 ECHO;
 	YY_BREAK
-#line 788 "lex.yy.c"
+#line 788 "lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1789,5 +1789,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 23 "calc.l"
+#line 24 "calc.l"
 

@@ -2,59 +2,45 @@
 #include <stdio.h>
 %}
 
+%parse-param { int *result }
+
 %union {
     int num;
 }
 
 %token <num> NUMBER
 
-%type <num> expr term prim
+%type <num> stmt expr term prim
 
-%token ADD SUB MUL DIV LP RP CR
+%token ADD SUB MUL DIV MOD LP RP
 
 %%
-lines
-    : lines line
-    | line
+stmt
+    : expr
+    { *result = $1; }
     ;
-
-line
-    : expr CR
-    {
-        printf("= %d\n", $1);
-    }
-    ;
-
 expr
     : term
-    | expr ADD term
-    {
-        $$ = $1 + $3;
-    }
-    | expr SUB term
-    {
-        $$ = $1 - $3;
-    }
+    | expr ADD term     
+    { $$ = $1 + $3; }
+    | expr SUB term     
+    { $$ = $1 - $3; }
     ;
 
 term
     : prim
-    | term MUL prim
-    {
-        $$ = $1 * $3;
-    }
-    | term DIV prim
-    {
-        $$ = $1 / $3;
-    }
+    | term MUL prim     
+    { $$ = $1 * $3; }
+    | term DIV prim     
+    { $$ = $1 / $3; }
+    | term MOD prim     
+    { $$ = $1 % $3; }
     ;
 
 prim
     : NUMBER
-    | LP expr RP
-    {
-        $$ = $2;
-    }
+    | LP expr RP    
+    { $$ = $2; }
     ;
 
 
@@ -63,10 +49,5 @@ int yyerror(char const *str)
 {
     fprintf(stderr, "error: %s\n", str);
     return 1;
-}
-
-int main(void)
-{
-    return yyparse();
 }
 

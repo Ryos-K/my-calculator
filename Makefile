@@ -1,22 +1,27 @@
-LEX 	= lex
-YACC 	= yacc
+LEX 	= flex
+YACC 	= bison
 LEXSRC 	= calc.l
 YACCSRC = calc.y
+MAINSRC = main.c
+LEXOUT  = lexer.c
+YACCOUT = parser.c
+CALCOUT = calc
 
-all: calc
+all: $(CALCOUT)
 
-calc: lex.yy.c y.tab.c
-	$(CC) -o calc lex.yy.c y.tab.c
+$(CALCOUT): $(MAINSRC) $(LEXOUT) $(YACCOUT)
+	$(CC) -o calc main.c $(LEXOUT) $(YACCOUT)
 
-lex.yy.c: $(LEXSRC)
-	$(LEX) $(LEXSRC)
+$(LEXOUT): $(LEXSRC)
+	$(LEX)  -o $(LEXOUT) $(LEXSRC) 
 
-y.tab.c: $(YACCSRC)
-	$(YACC) -d $(YACCSRC)
+$(YACCOUT): $(YACCSRC)
+	$(YACC) -o $(YACCOUT) -d $(YACCSRC)
 
 .PHONY: clean test
 clean: 
-	rm -f calc lex.yy.c y.tab.c y.tab.h
+	rm -f $(CALCOUT) $(LEXOUT) $(YACCOUT)
+
 
 test:
 	bash test/test.sh ./calc ./test

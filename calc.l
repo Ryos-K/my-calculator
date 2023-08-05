@@ -1,18 +1,19 @@
 %{
 #include <stdio.h>
-#include "y.tab.h"
+#include "parser.h"
 %}
 
 %option noyywrap
+%option header-file="lexer.h"
 
 %%
 "+"         return ADD;
 "-"         return SUB;
 "*"         return MUL;
 "/"         return DIV;
+"%"         return MOD;
 "("         return LP;
 ")"         return RP;
-"\n"        return CR;
 [ \t]+      ;
 [1-9][0-9]* {
     int val;

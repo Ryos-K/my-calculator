@@ -15,3 +15,12 @@ sudo apt install flex
 ```sh
 sudo apt install bison
 ```
+
+## Build & Run
+
+```sh
+cd build
+cmake ..
+make
+./calc
+```
